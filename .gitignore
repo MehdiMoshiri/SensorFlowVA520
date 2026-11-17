@@ -1,0 +1,20 @@
+bin/
+obj/
+*.user
+.vs/
+*.pdb
+
+# build output: the ready-made exe is published as a GitHub Release, not committed.
+# Only the Raspberry Pi start script lives in dist/.
+dist/*
+!dist/run.sh
+
+# files the program creates next to the exe while running
+ErrorLog.txt
+ErrorLog.txt.old
+VA520Tester.ini
+readings_*.csv
+TestReport_*.txt
+
+# vendor manual (copyrighted, not part of this repository)
+*.pdf

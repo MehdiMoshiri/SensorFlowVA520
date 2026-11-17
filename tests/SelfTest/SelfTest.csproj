@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Console self test: runs the protocol core against the built-in VA 520 simulator (no hardware needed). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>5</LangVersion>
+    <RootNamespace>VA520Tester</RootNamespace>
+    <AssemblyName>VA520SelfTest</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="..\..\src\ErrorLogger.cs" />
+    <Compile Include="..\..\src\Modbus.cs" />
+    <Compile Include="..\..\src\Channels.cs" />
+    <Compile Include="..\..\src\ModbusClient.cs" />
+    <Compile Include="..\..\src\Va520Map.cs" />
+    <Compile Include="..\..\src\Poller.cs" />
+    <Compile Include="..\..\src\Simulator.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

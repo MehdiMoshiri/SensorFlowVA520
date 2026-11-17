@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the tester
+        run: dotnet build VA520Tester.csproj -c Release -o dist
+
+      - name: Build the self test
+        run: dotnet build tests/SelfTest/SelfTest.csproj -c Release -o tests/SelfTest/bin
+
+      - name: Run the self test (protocol core against the built-in simulator)
+        run: tests/SelfTest/bin/VA520SelfTest.exe
+
+      - name: Package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force release | Out-Null
+          Copy-Item dist/VA520Tester.exe, dist/VA520Tester.exe.config, dist/run.sh release/
+          Compress-Archive -Path release/* -DestinationPath VA520Tester.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VA520Tester
+          path: VA520Tester.zip

@@ -1,0 +1,6 @@
+* text=auto
+
+# shell scripts must keep LF line endings (they run on Linux / Raspberry Pi)
+*.sh text eol=lf
+# batch files need CRLF on Windows
+*.cmd text eol=crlf
