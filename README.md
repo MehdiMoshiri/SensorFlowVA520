@@ -6,7 +6,8 @@
 🇮🇷 [راهنمای فارسی](README.fa.md)
 
 A test program for the **CS Instruments VA 520** flow sensor (Modbus RTU over RS485, 4..20 mA output, pulse output).
-Written in **C# / .NET Framework 4.8 / Windows Forms**, no database, and it also runs with **Mono on a Raspberry Pi**.
+Written in **C# / .NET Framework 4.8 / Windows Forms**, no database, and it also runs with **Mono on a Raspberry Pi**
+(tested with a real sensor on both, see [Status](#status)).
 Every test variable (port, baud rate, parity, slave ID, word order, timeouts, retries, intervals, ...) is on the form.
 
 > **Independent project.** It is not made, endorsed or supported by CS Instruments. The sensor manual is not part of this
@@ -15,12 +16,14 @@ Every test variable (port, baud rate, parity, slave ID, word order, timeouts, re
 
 ## Status
 
-* Verified: compiles with C# 5 on .NET 4.8, and **57 automated tests** run the protocol core against the built-in VA 520 simulator
+* **Tested on real hardware (November 2026):** on **Windows** and on a **Raspberry Pi with Mono**, with a **real VA 520 sensor**
+  connected through a **USB to RS485 converter**. Both runs gave very good results and all sensor parameters were displayed correctly in the program.
+* Automated checks: compiles with C# 5 on .NET 4.8, and **57 automated tests** run the protocol core against the built-in VA 520 simulator
   (CRC, echo removal, byte/word orders, RTU, MBAP, exceptions, register writes, retries, error log, poller).
   The Windows UI was also exercised against the simulator (connect, polling, statistics, log, raw frame, read, scan, stress test).
-* **Not verified yet:** running under **Mono / Raspberry Pi**, and talking to a **real serial port and a real sensor**.
-  The code only uses simple, portable WinForms / `SerialPort` features, but please try it and open an issue with the log if something breaks.
-* The *Auto-detect* and *Write* buttons are covered at core level only, not by clicking through the form.
+* Only one sensor and one converter model have been tried so far. Other USB-RS485 adapters (especially ones that need DTR / RTS handling
+  or echo removal) and other sensor firmware versions may behave differently; please open an issue with the `ErrorLog.txt` lines and the TX / RX trace if something breaks.
+* The *Auto-detect* and *Write* (sensor settings) functions are covered by the core-level automated tests; there is no hardware test report for them yet.
 
 ## Features
 
